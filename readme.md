@@ -47,3 +47,10 @@
 ├── uninstall.bat       # 卸载脚本
 ├── go.mod              # Go 模块文件
 └── README.md           # 本文档
+
+## 无脑使用
+
+1.下载release里的压缩包解压
+2.双击install.bat
+3.使用
+4.不用了双击uninstall.bat
