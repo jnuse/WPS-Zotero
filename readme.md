@@ -1,6 +1,6 @@
 # WPS-Zotero (Go 版本)
 
-本项目是 [WPS-Zotero](https://github.com/tankwyn/WPS-Zotero) 的 Go 语言重构版本。原项目使用 Python，本项目将其核心功能改用 Go 实现，并对部分文本进行了中文化。
+本项目是 [WPS-Zotero](https://github.com/tankwyn/WPS-Zotero) 的 Go 语言重构版本。原项目使用 Python，本项目将其部分功能改用 Go 实现，并对部分文本进行了中文化。
 
 ## 特性
 
