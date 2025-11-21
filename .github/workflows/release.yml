@@ -1,0 +1,48 @@
+name: Release WPS-Zotero
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.5'
+
+      - name: Build artifacts
+        run: |
+          chcp 65001
+          ./build.bat
+        shell: cmd
+
+      - name: Get version
+        id: get_version
+        run: |
+          $version = (Get-Content -Path ./wpsjs/version.js) -match "const VERSION = '(.*)'"
+          $version = $matches[1]
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+        shell: pwsh
+
+      - name: Prepare package
+        run: |
+          Remove-Item -Recurse -Force ./cmd
+          Remove-Item -Force ./go.mod
+          Remove-Item -Force ./go.sum
+          Compress-Archive -Path ./* -DestinationPath wps-zotero-v${{ steps.get_version.outputs.version }}.zip
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: wps-zotero-v${{ steps.get_version.outputs.version }}.zip
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Release v${{ steps.get_version.outputs.version }}
+          body: |
+            Release of version ${{ steps.get_version.outputs.version }}
+          draft: false
+          prerelease: false
