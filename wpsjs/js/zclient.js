@@ -17,17 +17,17 @@ function zc_createClient(documentId, processor) {
     function requestStatusHint(status) {
         if (status >= 300) {
             if (status < 400) {
-                zc_alert(`Received unexpected redirection message ${status}!`);
+                zc_alert(`收到意外的重定向消息 ${status}！`);
             }
             else if (status < 500) {
-                zc_alert(`Client error ${status}`);
+                zc_alert(`客户端错误 ${status}`);
             }
             else {
                 if (status === 503) {
-                    zc_alert('Zotero is serving another program, restart it if this is not the case.');
+                    zc_alert('Zotero 正在为其他程序提供服务，如果不是这种情况，请重新启动它。');
                 }
                 else {
-                    zc_alert(`Server error ${status}`);
+                    zc_alert(`服务器错误 ${status}`);
                 }
             }
         }
@@ -67,20 +67,20 @@ function zc_createClient(documentId, processor) {
             else {
                 state = false;
                 if (req) {
-                    console.error(`Unexpected response from Zotero: status = ${req.status}, msg = ${req.payload}`);
+                    zc_alert(`来自 Zotero 的意外响应: status = ${req.status}, msg = ${req.payload}`);
                     requestStatusHint(req.status);
                 }
             }
         }
         catch (error) {
             state = false;
-            console.error('Error occurred:', error);
-            const guide = flag ? '\nYou will have to restart Zotero.' : '';
+            zc_alert('发生错误:', error);
+            const guide = flag ? '\n您将需要重新启动 Zotero。' : '';
             if (error.name === 'NetworkError') {
-                zc_alert('Network error occurred, is Zotero running?' + guide);
+                zc_alert('发生网络错误，Zotero 是否正在运行？' + guide);
             }
             else {
-                zc_alert(`Error occurred ${error.name}, please click dev tool, navigate to console and report the issue.` + guide);
+                zc_alert(`发生错误 ${error.name}，请单击开发人员工具，导航到控制台并报告问题。` + guide);
             }
         }
 
@@ -165,7 +165,7 @@ function zc_createClient(documentId, processor) {
             assert(docId === documentId);
             assert(fieldType === 'Http');
             if (noteType > 1) {
-                console.warn('Only support in-text and footnote citations, will use footnote instead!');
+                zc_alert('仅支持文本内和脚注引文，将改用脚注！');
                 noteType = 1;
             }
             const data = processor.insertField(docId, noteType > 0 ? true : false);

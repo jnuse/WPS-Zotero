@@ -1,0 +1,18 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="OnAddinLoad">
+    <ribbon startFromScratch="false">
+        <tabs>
+            <tab id="zoteroTab" label="Zotero" keytip="C">
+                <group id="zoteroGroup" label="Zotero">
+                    <button id="btnAddEditCitation" label="添加/编辑引文" onAction="OnAction" getImage="GetImage" visible="true" size="large" supertip="插入一个新引文，或编辑当前光标位置的引文" keytip="C"/>
+                    <button id="btnAddEditBib" label="添加/编辑参考文献" onAction="OnAction" getImage="GetImage" visible="true" size="large" supertip="在当前光标位置插入新的参考文献，或编辑现有的参考文献" keytip="B"/>
+                    <button id="btnRefresh" label="刷新" onAction="OnAction" getImage="GetImage" visible="true" size="large" supertip="更新所有引文以反映更改" keytip="R"/>
+                    <button id="btnPref" label="首选项" onAction="OnAction" getImage="GetImage" visible="true" supertip="更改引文样式或区域设置" keytip="P"/>
+                    <button id="btnAddNote" label="添加笔记" onAction="OnAction" getImage="GetImage" visible="true" supertip="在当前光标位置插入一个新笔记" keytip="N"/>
+                    <button id="btnUnlink" label="取消链接" onAction="OnAction" getImage="GetImage" visible="true" supertip="删除所有 Zotero 字段代码并取消与 Zotero 库的链接" keytip="U"/>
+                    <button id="btnExport" label="导出" onAction="OnAction" getImage="GetImage" visible="true" supertip="导出文档以切换到另一个文字处理器" keytip="E"/>
+                    <button id="btnAbout" label="关于" onAction="OnAction" getImage="GetImage" visible="true" size="large" supertip="关于此插件" keytip="A"/>
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>
