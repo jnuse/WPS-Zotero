@@ -21,11 +21,10 @@ jobs:
           ./build.bat
         shell: cmd
 
-      - name: Get version
+      - name: Generate Version
         id: get_version
         run: |
-          $version = (Get-Content -Path ./wpsjs/version.js) -match "const VERSION = '(.*)'"
-          $version = $matches[1]
+          $version = "0.0.${{ github.run_number }}"
           echo "version=$version" >> $env:GITHUB_OUTPUT
         shell: pwsh
 
